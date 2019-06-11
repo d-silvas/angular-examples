@@ -1,5 +1,5 @@
 <textarea [value]="newPost" name="content" rows="6" #postInput></textarea>
-<hr>
+<br>
 <button (click)="onAddPostWithHTMLElRef(postInput)">Save post</button>
 <p>
   {{ newPost }}
@@ -11,7 +11,7 @@
 
 <!-- two-way binding -->
 <textarea [(ngModel)]="newPostTwoWay" name="contentTwoWay" rows="6"></textarea>
-<hr>
+<br>
 <button>No need for btn</button>
 <p>
   {{ newPostTwoWay }}
