@@ -6,11 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-list.component.css']
 })
 export class PostListComponent implements OnInit {
-  posts = [
-    { title: 'First post', content: 'This is the first post content' },
-    { title: 'Second post', content: 'This is the second post content' },
-    { title: 'Third post', content: 'This is the third post content' }
-  ];
+  // public posts = [
+  //   { title: 'First post', content: 'This is the first post content' },
+  //   { title: 'Second post', content: 'This is the second post content' },
+  //   { title: 'Third post', content: 'This is the third post content' }
+  // ];
+  public posts = [];
 
   constructor() { }
 
