@@ -1,0 +1,14 @@
+<app-header></app-header>
+<main>
+  <!-- <div style="padding:2rem;">
+    <app-post-create></app-post-create>
+  </div> -->
+  <div style="margin:8px;height:20px;width:100%;background:green;"></div>
+  <div style="padding:2rem;">
+    <app-post-create-material (postCreated)="onPostAdded($event)"></app-post-create-material>
+  </div>
+  <div style="margin:8px;height:20px;width:100%;background:green;"></div>
+  <div style="padding:2rem;">
+    <app-post-list [posts]="storedPosts"></app-post-list>
+  </div>
+</main>
