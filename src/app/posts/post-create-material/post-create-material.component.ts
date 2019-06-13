@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-post-create-material',
@@ -6,8 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-create-material.component.css']
 })
 export class PostCreateMaterialComponent implements OnInit {
-  newPost = 'NO CONTENT';
-  enteredValue = '';
+  enteredTitle = '';
+  enteredContent = '';
+  @Output() postCreated = new EventEmitter();
 
   constructor() { }
 
@@ -15,6 +16,10 @@ export class PostCreateMaterialComponent implements OnInit {
   }
 
   public onAddPost() {
-    this.newPost = this.enteredValue;
+    const post = {
+      title: this.enteredTitle,
+      content: this.enteredContent
+    };
+    this.postCreated.emit(post);
   }
 }
