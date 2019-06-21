@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PostsService } from '../posts.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-post-create',
@@ -6,17 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent implements OnInit {
-  newPost = 'NO CONTENT';
-  newPostTwoWay = 'I SAID NO CONTENT';
-
-  constructor() { }
+  constructor(
+    public postsService: PostsService
+  ) { }
 
   ngOnInit() {
   }
 
-  public onAddPostWithHTMLElRef(postInput: HTMLTextAreaElement) {
-    this.newPost = postInput.value;
+  public onAddPost(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+
+    this.postsService.addPost(form.value.title, form.value.content);
+
+    form.resetForm();
   }
-
-
 }

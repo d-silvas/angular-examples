@@ -1,18 +1,45 @@
-<textarea [value]="newPost" name="content" rows="6" #postInput></textarea>
+<mat-card>
+  <!--
+  Template-driven Forms
+    * #postForm gives us acces to the Angular form object
+        Angular creates behind the scenes
+    * ngModel in #title gives you access to the data managed
+        by that input
+    * Need ngModel directive on inputs
+  -->
+  <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="title"
+        ngModel
+        required
+        placeholder="Post title"
+        #title="ngModel"
+        >
+        <mat-error *ngIf="title.invalid">Please enter a post title</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+        matInput
+        rows="6"
+        name="content"
+        ngModel
+        required
+        placeholder="Post content"
+        #content="ngModel"
+        >
+      </textarea>
+      <mat-error *ngIf="content.invalid">Please enter some content</mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit"
+      >
+      Save post
+    </button>
+  </form>
+</mat-card>
 <br>
-<button (click)="onAddPostWithHTMLElRef(postInput)">Save post</button>
-<p>
-  {{ newPost }}
-</p>
-
-<br>
-<hr>
-<br>
-
-<!-- two-way binding -->
-<textarea [(ngModel)]="newPostTwoWay" name="contentTwoWay" rows="6"></textarea>
-<br>
-<button>No need for btn</button>
-<p>
-  {{ newPostTwoWay }}
-</p>

@@ -6,7 +6,6 @@ import { MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatEx
 
 import { AppComponent } from './app.component';
 import { PostCreateComponent } from './posts/post-create/post-create.component';
-import { PostCreateMaterialComponent } from './posts/post-create-material/post-create-material.component';
 import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 
@@ -14,7 +13,6 @@ import { PostListComponent } from './posts/post-list/post-list.component';
   declarations: [
     AppComponent,
     PostCreateComponent,
-    PostCreateMaterialComponent,
     HeaderComponent,
     PostListComponent
   ],
