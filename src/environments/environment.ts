@@ -2,8 +2,14 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const nodeServer = {
+  ip: '172.16.8.46',
+  port: '3000'
+};
+
 export const environment = {
-  production: false
+  production: false,
+  baseUrl: 'http://' + nodeServer.ip + ':' + nodeServer.port + '/api/',
 };
 
 /*
