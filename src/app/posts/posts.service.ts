@@ -10,13 +10,14 @@ import { environment } from 'src/environments/environment';
 export class PostsService {
   private posts: Post[] = [];
   private postsUpdated = new Subject<Post[]>();
+  readonly postsBaseUrl = environment.baseUrl + 'posts';
 
   constructor(
     private http: HttpClient
   ) { }
 
   getPosts() {
-    this.http.get<{message: string, posts: Post[]}>(environment.baseUrl + 'posts')
+    this.http.get<{message: string, posts: Post[]}>(this.postsBaseUrl)
     .subscribe((postsData) => {
       this.posts = postsData.posts;
       this.postsUpdated.next([...this.posts]);
@@ -29,7 +30,11 @@ export class PostsService {
 
   addPost(title: string, content: string) {
     const post: Post = { id: null, title, content };
-    this.posts.push(post);
-    this.postsUpdated.next([...this.posts]);
+    this.http.post<{ message: string }>(this.postsBaseUrl, post)
+      .subscribe((response) => {
+        console.log(response.message);
+        this.posts.push(post);
+        this.postsUpdated.next([...this.posts]);
+      });
   }
 }

@@ -1,7 +1,12 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
 
-app.use((rqe, res, next) => {
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
     'Access-Control-Allow-Headers',
@@ -14,7 +19,15 @@ app.use((rqe, res, next) => {
   next();
 });
 
-app.use('/api/posts', (req, res, next) => {
+app.post('/api/posts', (req, res, next) => {
+  const post = req.body;
+  console.log(post);
+  res.status(201).json({
+    message: 'Post added successfully'
+  });
+});
+
+app.get('/api/posts', (req, res, next) => {
   const posts = [
     { id: 'obn03ujb0q', title: 'First server-side post', content: 'This is coming from server'},
     { id: 'onawd90kww', title: 'Second server-side post', content: 'This is coming from server!'},
