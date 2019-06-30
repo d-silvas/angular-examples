@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 const nodeServer = {
-  ip: '172.16.8.46',
+  ip: 'localhost',
   port: '3000'
 };
 
