@@ -3,6 +3,7 @@ import { Post } from './post.model';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,27 @@ export class PostsService {
   ) { }
 
   getPosts() {
-    this.http.get<{message: string, posts: Post[]}>(this.postsBaseUrl)
-    .subscribe((postsData) => {
-      this.posts = postsData.posts;
-      this.postsUpdated.next([...this.posts]);
-    });
+    this.http
+      // We say posts is type "any" because it comes from the backend with "_id"
+      // instead of "id" (which our model specifies). We use "map" to fix this
+      .get<{message: string, posts: any}>(this.postsBaseUrl)
+      .pipe(
+        map((postData) => {
+          return postData.posts.map(
+            post => {
+              return {
+                title: post.title,
+                content: post.content,
+                id: post._id
+              }
+            }
+          )
+        })
+      )
+      .subscribe((transformedPosts) => {
+        this.posts = transformedPosts;
+        this.postsUpdated.next([...this.posts]);
+      });
   }
 
   getPostUpdateListener() {

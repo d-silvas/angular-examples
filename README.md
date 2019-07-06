@@ -22,6 +22,7 @@ mongo
 ```
 - Queries etc (inside mongodb shell)
 ```sh
+show databases
 use course-app-db
 show collections
 db.posts.find() # Show all items in one collection
