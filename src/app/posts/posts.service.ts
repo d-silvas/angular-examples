@@ -30,9 +30,9 @@ export class PostsService {
                 title: post.title,
                 content: post.content,
                 id: post._id
-              }
+              };
             }
-          )
+          );
         })
       )
       .subscribe((transformedPosts) => {
@@ -52,6 +52,13 @@ export class PostsService {
         console.log(response.message);
         this.posts.push(post);
         this.postsUpdated.next([...this.posts]);
+      });
+  }
+
+  deletePost(postId: string) {
+    this.http.delete(`${this.postsBaseUrl}/${postId}`)
+      .subscribe(() => {
+        console.log('Deleted!');
       });
   }
 }
