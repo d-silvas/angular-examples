@@ -1,4 +1,9 @@
-<mat-accordion multi="true" *ngIf="posts.length > 0; else noPostsTemplate">
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<!--
+  Note: we should change #noPostsTemplate to have its own ngIf because we don't want
+  it to show when isLoading == true (the spinner is on the screen)
+-->
+<mat-accordion multi="true" *ngIf="posts.length > 0 && !isLoading; else noPostsTemplate">
   <mat-expansion-panel *ngFor="let post of posts">
     <mat-expansion-panel-header>
       {{ post.title }}
